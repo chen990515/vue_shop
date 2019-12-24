@@ -299,6 +299,12 @@ export default {
         return this.$message.error('删除用户失败! ')
       }
       this.$message.success('删除用户成功! ')
+      // 判断一下, 数组的长度, 如果说它的长度是等于1 就表示当前页只有一条数据了, 当我们点击了删除以后 就应该让当前页进行 -1
+      if (this.queryInfo.pagenum !== 1) {
+        if (this.userList.length === 1) {
+          this.queryInfo.pagenum -= 1
+        }
+      }
       this.getUserList()
     },
     // 展示分配角色的对话框
